@@ -1,6 +1,7 @@
 package com.compliance.dashboard.model.complianceHubModel;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,16 +10,26 @@ import org.hibernate.annotations.Comment;
 import com.compliance.dashboard.model.complianceCategoryHub.ComplianceCategoryHub;
 import com.compliance.dashboard.model.complianceTaskHubModel.ComplianceTaskHub;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-//@Table(name = "compliance_hub")
+@Data
+@Table(name = "compliance_hub")
 public class ComplianceHub {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 //    @NotNull
@@ -51,11 +62,11 @@ public class ComplianceHub {
     @Comment(value="1 : Mandatory Compliance, 2: Optional Compliance")
     private int priority;
 
-//    @ManyToOne(targetEntity = ComplianceCategoryHub.class,fetch = FetchType.LAZY)
-//    @JoinColumn(name = "compliance_category_hub_id",nullable = false)
+    @ManyToOne(targetEntity = ComplianceCategoryHub.class,fetch = FetchType.LAZY)
+    @JoinColumn(name = "compliance_category_hub_id",nullable = false)
     private ComplianceCategoryHub complianceCategoryHub;
 
-//    @OneToMany(mappedBy = "complianceHub",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "complianceHub",cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<ComplianceTaskHub> complianceTaskHubList=new ArrayList<>();
 
 }

@@ -8,12 +8,17 @@ import org.hibernate.annotations.Comment;
 
 import com.compliance.dashboard.model.stateModel.State;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-//@Table(name = "city")
+@Data
+@Table(name = "city")
 public class City {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 //    @ManyToOne(targetEntity = State.class)

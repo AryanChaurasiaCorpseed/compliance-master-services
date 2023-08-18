@@ -1,8 +1,11 @@
-package com.master.controller.stateController;
+package com.compliance.dashboard.controller.stateController;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.compliance.dashboard.service.stateService.StateService;
 
 @CrossOrigin
 @RestController

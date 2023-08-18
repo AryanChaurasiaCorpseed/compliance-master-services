@@ -6,7 +6,13 @@ import java.util.List;
 
 import com.compliance.dashboard.model.complianceHubModel.ComplianceHub;
 
-//@Table(name = "compliance_category_hub")
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+@Data
+@Table(name = "compliance_category_hub")
 public class ComplianceCategoryHub {
 
 //	@Id
@@ -35,7 +41,7 @@ public class ComplianceCategoryHub {
 //	@Comment(value = "1 : Active, 0 : Inactive")
 	private boolean isEnable;
 
-//	@OneToMany(mappedBy = "complianceCategoryHub",cascade = CascadeType.ALL,orphanRemoval = true)
+	@OneToMany(mappedBy = "complianceCategoryHub",cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<ComplianceHub> complianceHubList=new ArrayList<>();
 
 }

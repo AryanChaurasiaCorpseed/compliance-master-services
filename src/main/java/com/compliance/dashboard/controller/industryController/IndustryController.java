@@ -1,12 +1,18 @@
-package com.master.controller.industryController;
+package com.compliance.dashboard.controller.industryController;
 
-import com.master.dto.industryDto.IndustryRequest;
-import com.master.response.ResponseEntity;
-import com.master.service.industryService.IndustryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import com.compliance.dashboard.service.industryService.IndustryService;
 
 @RestController
 @CrossOrigin
@@ -22,12 +28,12 @@ public class IndustryController {
 	}
 	
 	@PostMapping("/save")
-	public ResponseEntity saveIndustry(@Valid @RequestBody IndustryRequest industryRequest){
+	public ResponseEntity saveIndustry(@RequestBody IndustryRequest industryRequest){
 		return this.industryService.saveIndustry(industryRequest);
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity updateIndustry(@Valid @RequestBody IndustryRequest industryRequest){
+	public ResponseEntity updateIndustry( @RequestBody IndustryRequest industryRequest){
 		return this.industryService.updateIndustry(industryRequest);
 	}
 	

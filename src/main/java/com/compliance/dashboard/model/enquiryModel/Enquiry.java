@@ -3,7 +3,9 @@ package com.compliance.dashboard.model.enquiryModel;
 import java.util.Date;
 
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Table(name = "enquiry")
 public class Enquiry {
 

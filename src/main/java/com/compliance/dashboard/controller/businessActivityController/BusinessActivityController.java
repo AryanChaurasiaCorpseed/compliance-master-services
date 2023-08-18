@@ -1,12 +1,18 @@
-package com.master.controller.businessActivityController;
+package com.compliance.dashboard.controller.businessActivityController;
 
-import com.master.dto.businessActivityDto.BusinessActivityRequest;
-import com.master.response.ResponseEntity;
-import com.master.service.businessActivityService.BusinessActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import com.compliance.dashboard.service.businessActivityService.BusinessActivityService;
 
 @RestController
 @CrossOrigin
@@ -22,12 +28,12 @@ public class BusinessActivityController {
 	}
 	
 	@PostMapping("/save")
-	public ResponseEntity saveBusinessActivity(@Valid @RequestBody BusinessActivityRequest baRequest){
+	public ResponseEntity saveBusinessActivity( @RequestBody BusinessActivityRequest baRequest){
 		return this.businessActivityService.saveBusinessActivity(baRequest);
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity updateBusinessActivity(@Valid @RequestBody BusinessActivityRequest baRequest){
+	public ResponseEntity updateBusinessActivity( @RequestBody BusinessActivityRequest baRequest){
 		return this.businessActivityService.updateBusinessActivity(baRequest);
 	}
 	

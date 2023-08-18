@@ -6,15 +6,22 @@ import org.hibernate.annotations.SQLUpdates;
 
 import com.compliance.dashboard.model.stateModel.State;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
 import java.util.*;
 
 //
-//@Data
-//@Table(name = "country")
+@Data
+@Table(name = "country")
 public class Country {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 //    @Column(unique = true)
@@ -35,7 +42,7 @@ public class Country {
 //    @Comment(value = "1 : Active, 0 : Inactive")
     private boolean isEnable;
 
-//    @OneToMany(mappedBy = "country",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "country",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<State> states=new HashSet<>();
 
 }
