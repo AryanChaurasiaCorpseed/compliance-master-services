@@ -22,6 +22,6 @@ public class SubIndustryRequest {
 
 	private boolean isEnable;
 
-	private Industry industry;
+//	private Industry industry;
 
 }

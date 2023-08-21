@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.compliance.dashboard.model.complianceCategoryHub.ComplianceCategoryHub;
 import com.compliance.dashboard.model.complianceHubModel.ComplianceHub;
 import com.compliance.dashboard.model.complianceSubTaskHubModel.ComplianceSubTaskHub;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,9 +18,18 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
+@Getter
+@Setter
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "compliance_task_hub")
 public class ComplianceTaskHub {
 
@@ -46,7 +57,7 @@ public class ComplianceTaskHub {
 //	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 
-//	@Column(name = "updated_at")
+//	@Column(name = "updated_at")qq
 //	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 
@@ -56,11 +67,11 @@ public class ComplianceTaskHub {
 
 	private String criticality;
 
-	@ManyToOne(targetEntity = ComplianceHub.class,fetch = FetchType.LAZY)
-	@JoinColumn(name = "compliance_hub_id",nullable = false)
-	private ComplianceHub complianceHub;
+//	@ManyToOne(targetEntity = ComplianceHub.class,fetch = FetchType.LAZY)
+//	@JoinColumn(name = "compliance_hub_id",nullable = false)
+//	private ComplianceHub complianceHub;
 	
-	@OneToMany(mappedBy = "complianceTaskHub",cascade = CascadeType.ALL,orphanRemoval = true)
-	private List<ComplianceSubTaskHub> complianceSubTasks=new ArrayList<>();
-
+//	@OneToMany(mappedBy = "complianceTaskHub",cascade = CascadeType.ALL,orphanRemoval = true)
+//	private List<ComplianceSubTaskHub> complianceSubTasks=new ArrayList<>();
+//
 }

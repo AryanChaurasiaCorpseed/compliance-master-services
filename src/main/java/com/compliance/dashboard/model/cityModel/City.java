@@ -3,17 +3,25 @@ package com.compliance.dashboard.model.cityModel;
 import lombok.*;
 
 import java.util.Date;
+import java.util.Set;
 
 import org.hibernate.annotations.Comment;
 
+import com.compliance.dashboard.model.countryModel.Country;
 import com.compliance.dashboard.model.stateModel.State;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Data
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Table(name = "city")
 public class City {
 
@@ -23,7 +31,7 @@ public class City {
 
 //    @ManyToOne(targetEntity = State.class)
 //    @JoinColumn(name = "state_id",nullable = false)
-    private State state;
+//    private State state;
 
 //    @NotNull
     private String name;

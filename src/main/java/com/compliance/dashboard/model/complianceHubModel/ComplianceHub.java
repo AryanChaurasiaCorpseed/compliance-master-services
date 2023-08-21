@@ -11,6 +11,7 @@ import com.compliance.dashboard.model.complianceCategoryHub.ComplianceCategoryHu
 import com.compliance.dashboard.model.complianceTaskHubModel.ComplianceTaskHub;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +26,11 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+@Getter
+@Setter
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "compliance_hub")
 public class ComplianceHub {
 
@@ -62,11 +68,11 @@ public class ComplianceHub {
     @Comment(value="1 : Mandatory Compliance, 2: Optional Compliance")
     private int priority;
 
-    @ManyToOne(targetEntity = ComplianceCategoryHub.class,fetch = FetchType.LAZY)
-    @JoinColumn(name = "compliance_category_hub_id",nullable = false)
-    private ComplianceCategoryHub complianceCategoryHub;
-
-    @OneToMany(mappedBy = "complianceHub",cascade = CascadeType.ALL,orphanRemoval = true)
-	private List<ComplianceTaskHub> complianceTaskHubList=new ArrayList<>();
+//    @ManyToOne(targetEntity = ComplianceCategoryHub.class,fetch = FetchType.LAZY)
+//    @JoinColumn(name = "compliance_category_hub_id",nullable = false)
+//    private ComplianceCategoryHub complianceCategoryHub;
+//
+//    @OneToMany(mappedBy = "complianceHub",cascade = CascadeType.ALL,orphanRemoval = true)
+//	private List<ComplianceTaskHub> complianceTaskHubList=new ArrayList<>();
 
 }

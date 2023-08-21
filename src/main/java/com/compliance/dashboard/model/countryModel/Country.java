@@ -4,9 +4,12 @@ import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.SQLUpdates;
 
+import com.compliance.dashboard.model.complianceCategoryHub.ComplianceCategoryHub;
+import com.compliance.dashboard.model.complianceHubModel.ComplianceHub;
 import com.compliance.dashboard.model.stateModel.State;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,6 +20,11 @@ import java.util.*;
 
 //
 @Data
+@Getter
+@Setter
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "country")
 public class Country {
 
@@ -42,7 +50,7 @@ public class Country {
 //    @Comment(value = "1 : Active, 0 : Inactive")
     private boolean isEnable;
 
-    @OneToMany(mappedBy = "country",cascade = CascadeType.ALL,orphanRemoval = true)
-    private Set<State> states=new HashSet<>();
-
+//    @OneToMany(mappedBy = "country",cascade = CascadeType.ALL,orphanRemoval = true)
+//    private Set<State> states=new HashSet<>();
+//
 }

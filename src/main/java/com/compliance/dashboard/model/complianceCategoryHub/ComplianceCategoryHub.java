@@ -7,16 +7,29 @@ import java.util.List;
 import com.compliance.dashboard.model.complianceHubModel.ComplianceHub;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
+@Getter
+@Setter
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "compliance_category_hub")
 public class ComplianceCategoryHub {
 
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 //	@NotNull
@@ -41,7 +54,7 @@ public class ComplianceCategoryHub {
 //	@Comment(value = "1 : Active, 0 : Inactive")
 	private boolean isEnable;
 
-	@OneToMany(mappedBy = "complianceCategoryHub",cascade = CascadeType.ALL,orphanRemoval = true)
-	private List<ComplianceHub> complianceHubList=new ArrayList<>();
+//	@OneToMany(mappedBy = "complianceCategoryHub",cascade = CascadeType.ALL,orphanRemoval = true)
+//	private List<ComplianceHub> complianceHubList=new ArrayList<>();
 
 }
