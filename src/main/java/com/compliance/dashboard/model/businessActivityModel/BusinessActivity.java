@@ -23,7 +23,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @Entity
-@Table(name="business_activitys")
+@Table(name="business_activity")
 public class BusinessActivity {
 
 	@Id
@@ -33,7 +33,7 @@ public class BusinessActivity {
 //	@ManyToOne(targetEntity = SubIndustry.class)
 //	@JoinColumn(name = "sub_industry_id",nullable = false)
 //	private SubIndustry subIndustry;
-	
+//	
 //	@NotEmpty
 //	@NotNull
 //	@NotBlank

@@ -1,7 +1,9 @@
 package com.compliance.dashboard.controller.businessActivityController;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import com.compliance.dashboard.response.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +24,7 @@ public class BusinessActivityController {
 	@Autowired
 	private BusinessActivityService businessActivityService;
 
-	@GetMapping()
+	@GetMapping("/getAllBusiness")
 	public ResponseEntity fetchAllBusinessActivity(){
 		return this.businessActivityService.fetchAllBusinessActivity();
 	}
