@@ -30,15 +30,14 @@ public class BusinessActivity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 //
-//	@ManyToOne(targetEntity = SubIndustry.class)
-//	@JoinColumn(name = "sub_industry_id",nullable = false)
-//	private SubIndustry subIndustry;
+	@ManyToOne
+	private SubIndustry subIndustry;
 //	
 //	@NotEmpty
 //	@NotNull
 //	@NotBlank
 //	@Column(name = "title")
-	private String title;
+	 String title;
 
 //	@Column(name = "created_at")
 //	@Temporal(TemporalType.TIMESTAMP)

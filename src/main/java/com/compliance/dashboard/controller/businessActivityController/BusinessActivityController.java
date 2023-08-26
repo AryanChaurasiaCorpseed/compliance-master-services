@@ -3,6 +3,8 @@ package com.compliance.dashboard.controller.businessActivityController;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.compliance.dashboard.model.businessActivityModel.BusinessActivity;
 import com.compliance.dashboard.response.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,17 +42,17 @@ public class BusinessActivityController {
 	}
 	
 	@GetMapping("/{businessActivityId}")
-	public ResponseEntity fetchBusinessActivityById(@PathVariable("businessActivityId") Long businessActivityId){
+	public BusinessActivity fetchBusinessActivityById(@PathVariable("businessActivityId") Long businessActivityId){
 		return this.businessActivityService.fetchBusinessActivityById(businessActivityId);
 	}
 
 	@DeleteMapping("/{businessActivityId}")
-	public ResponseEntity deleteBusinessActivity(@PathVariable("id") Long businessActivityId){
+	public boolean deleteBusinessActivity(@PathVariable("id") Long businessActivityId){
 		return this.businessActivityService.deleteBusinessActivityById(businessActivityId);
 	}
 	
 	@GetMapping("/search/{searchData}")
-	public ResponseEntity searchBusinessActivity(@PathVariable("searchData") String searchData){
+	public List<BusinessActivity> searchBusinessActivity(@PathVariable("searchData") String searchData){
 
 		return this.businessActivityService.searchBusinessActivity(searchData);
 	}

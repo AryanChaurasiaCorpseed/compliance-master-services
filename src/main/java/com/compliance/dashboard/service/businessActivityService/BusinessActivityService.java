@@ -17,11 +17,11 @@ public interface BusinessActivityService {
 
     ResponseEntity updateBusinessActivity(BusinessActivityRequest baRequest);
 
-    ResponseEntity fetchBusinessActivityById(Long businessActivityId);
+    BusinessActivity fetchBusinessActivityById(Long businessActivityId);
 
-    ResponseEntity deleteBusinessActivityById(Long businessActivityId);
+    boolean deleteBusinessActivityById(Long businessActivityId);
 
-    ResponseEntity searchBusinessActivity(String searchData);
+    List<BusinessActivity> searchBusinessActivity(String searchData);
 
     ResponseEntity searchBusinessActivityBySubIndustryId(Long subIndustryId);
 }

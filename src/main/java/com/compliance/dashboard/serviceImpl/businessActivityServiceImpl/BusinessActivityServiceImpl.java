@@ -80,29 +80,73 @@ public class BusinessActivityServiceImpl implements BusinessActivityService {
 		}
 		return new ResponseEntity().ok();
 	}
+	
+//	@Override
+//	public ResponseEntity updateBusinessActivity(BusinessActivityRequest baRequest) {
+//		BusinessActivity findBusinessActivity=this.businessActivityDao.
+//				findBusinessActivityBySubIndustryAndTitleAndIdNot(baRequest.getSubIndustry(),
+//						baRequest.getTitle(),baRequest.getId());
+//
+//		if(findBusinessActivity!=null)
+//			return new ResponseEntity().badRequest("Business Activity already exist !!");
+//
+//		BusinessActivity updateBusinessActivity=this.businessActivityDao
+//				.updateBusinessActivity(this.responseMapper.mapToUpdateBusinessActivity(baRequest));
+//
+//		if(updateBusinessActivity==null)
+//			return new ResponseEntity().internalServerError();
+//
+//		return new ResponseEntity().ok();
+//	}
 
 	@Override
 	public ResponseEntity updateBusinessActivity(BusinessActivityRequest baRequest) {
 		// TODO Auto-generated method stub
-		return null;
+        BusinessActivity findBusinessActivity = businessActivityRepository.findById(baRequest.getId()).get();		
+        findBusinessActivity.setTitle(baRequest.getTitle());       
+        findBusinessActivity.setSubIndustry(baRequest.getSubIndustry());
+        findBusinessActivity.setEnable(baRequest.isEnable());
+        businessActivityRepository.save(findBusinessActivity);
+		return new ResponseEntity().ok();
+	}
+
+
+	@Override
+	public BusinessActivity fetchBusinessActivityById(Long businessActivityId) {
+        BusinessActivity findBusinessActivity = businessActivityRepository.findById(businessActivityId).get();		
+		return findBusinessActivity;
+	}
+
+//	@Override
+//	public boolean deleteBusinessActivity(BusinessActivity businessActivity) {
+//		Session session=null;
+//		Transaction tx=null;
+//		try {
+//			session=this.sessionFactory.openSession();
+//			tx=session.beginTransaction();
+//			session.delete(businessActivity);
+//			tx.commit();
+//			return true;
+//		} catch (Exception e) {
+//			tx.rollback();
+//			return false;
+//		}finally {
+//			if(session!=null)session.close();
+//		}
+//	}
+	
+	@Override
+	public boolean deleteBusinessActivityById(Long businessActivityId) {
+        BusinessActivity findBusinessActivity = businessActivityRepository.findById(businessActivityId).get();		
+        findBusinessActivity.setEnable(false);
+        businessActivityRepository.save(findBusinessActivity);
+		return findBusinessActivity.isEnable();
 	}
 
 	@Override
-	public ResponseEntity fetchBusinessActivityById(Long businessActivityId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResponseEntity deleteBusinessActivityById(Long businessActivityId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResponseEntity searchBusinessActivity(String searchData) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<BusinessActivity> searchBusinessActivity(String searchData) {
+          List<BusinessActivity> findBusinessActivity = businessActivityRepository.findAllByTitle(searchData);		
+		return findBusinessActivity;
 	}
 
 	@Override
