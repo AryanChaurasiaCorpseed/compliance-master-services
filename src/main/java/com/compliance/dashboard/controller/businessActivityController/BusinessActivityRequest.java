@@ -25,5 +25,39 @@ public class BusinessActivityRequest {
 	private boolean isEnable;
 
 	private SubIndustry subIndustry;
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public boolean isEnable() {
+		return isEnable;
+	}
+
+	public void setEnable(boolean isEnable) {
+		this.isEnable = isEnable;
+	}
+
+	public SubIndustry getSubIndustry() {
+		return subIndustry;
+	}
+
+	public void setSubIndustry(SubIndustry subIndustry) {
+		this.subIndustry = subIndustry;
+	}
+
+
 
 }

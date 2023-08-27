@@ -50,4 +50,54 @@ public class BusinessActivity {
 //	@Column(length = 1,name="is_enable",columnDefinition = "tinyint(1) default 1")
 //	@Comment(value = "1 : Active, 0 : Inactive")
 	private boolean isEnable;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public SubIndustry getSubIndustry() {
+		return subIndustry;
+	}
+
+	public void setSubIndustry(SubIndustry subIndustry) {
+		this.subIndustry = subIndustry;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public boolean isEnable() {
+		return isEnable;
+	}
+
+	public void setEnable(boolean isEnable) {
+		this.isEnable = isEnable;
+	}
+	
+	
 }
