@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.compliance.dashboard.model.subIndustryModel.SubIndustry;
 import com.compliance.dashboard.service.subIndustryService.SubIndustryService;
 
 @RestController
@@ -33,7 +34,7 @@ public class SubIndustryController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity updateSubIndustry(@RequestBody SubIndustryRequest subIndustryRequest){
+	public SubIndustry updateSubIndustry(@RequestBody SubIndustryRequest subIndustryRequest){
 		return this.subIndustryService.updateSubIndustry(subIndustryRequest);
 	}
 
@@ -43,7 +44,7 @@ public class SubIndustryController {
 	}
 	
 	@GetMapping("/edit/{subIndustryId}")
-	public ResponseEntity fetchSubIndustryById(@PathVariable("subIndustryId") Long subIndustryId){
+	public SubIndustry fetchSubIndustryById(@PathVariable("subIndustryId") Long subIndustryId){
 		return this.subIndustryService.fetchSubIndustryById(subIndustryId);
 	}
 

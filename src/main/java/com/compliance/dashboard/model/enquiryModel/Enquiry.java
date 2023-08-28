@@ -25,18 +25,12 @@ public class Enquiry {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
 	private Long complianceId;
-
-
 	private String message;
-
-
 	private Date createdAt;
-
-
 	private Date updatedAt;
     private boolean isDelivered;
+    
 	public Long getId() {
 		return id;
 	}
