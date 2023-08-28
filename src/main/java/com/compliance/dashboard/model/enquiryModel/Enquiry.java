@@ -37,6 +37,44 @@ public class Enquiry {
 
 	private Date updatedAt;
     private boolean isDelivered;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Long getComplianceId() {
+		return complianceId;
+	}
+	public void setComplianceId(Long complianceId) {
+		this.complianceId = complianceId;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	public boolean isDelivered() {
+		return isDelivered;
+	}
+	public void setDelivered(boolean isDelivered) {
+		this.isDelivered = isDelivered;
+	}
+    
+    
 
 
 }
