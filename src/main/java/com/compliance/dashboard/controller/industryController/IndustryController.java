@@ -1,5 +1,7 @@
 package com.compliance.dashboard.controller.industryController;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.compliance.dashboard.model.industryModel.Industry;
 import com.compliance.dashboard.service.industryService.IndustryService;
 
 @RestController
@@ -23,7 +26,7 @@ public class IndustryController {
 	private IndustryService industryService;
 	
 	@GetMapping()
-	public ResponseEntity allIndustry(){
+	public List<Industry> allIndustry(){
 		return this.industryService.fetchAllIndustries();
 	}
 	
@@ -33,17 +36,17 @@ public class IndustryController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity updateIndustry( @RequestBody IndustryRequest industryRequest){
+	public Boolean updateIndustry( @RequestBody IndustryRequest industryRequest){
 		return this.industryService.updateIndustry(industryRequest);
 	}
 	
 	@GetMapping("/{industryId}")
-	public ResponseEntity fetchIndustry(@PathVariable("industryId") Long industryId){
+	public Industry fetchIndustry(@PathVariable("industryId") Long industryId){
 		return this.industryService.fetchIndustryById(industryId);
 	}
 
 	@DeleteMapping("/{industryId}")
-	public ResponseEntity deleteIndustry(@PathVariable("industryId") Long industryId){
+	public Boolean deleteIndustry(@PathVariable("industryId") Long industryId){
 		return this.industryService.deleteIndustryById(industryId);
 	}
 }

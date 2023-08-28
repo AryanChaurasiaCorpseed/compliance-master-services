@@ -14,6 +14,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Data
@@ -29,9 +30,8 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne(targetEntity = State.class)
-//    @JoinColumn(name = "state_id",nullable = false)
-//    private State state;
+    @ManyToOne
+    private State state;
 
 //    @NotNull
     private String name;

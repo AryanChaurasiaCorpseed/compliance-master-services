@@ -68,8 +68,7 @@ public class ComplianceHub {
     @Comment(value="1 : Mandatory Compliance, 2: Optional Compliance")
     private int priority;
 
-//    @ManyToOne(targetEntity = ComplianceCategoryHub.class,fetch = FetchType.LAZY)
-//    @JoinColumn(name = "compliance_category_hub_id",nullable = false)
+//    @ManyToOne
 //    private ComplianceCategoryHub complianceCategoryHub;
 //
 //    @OneToMany(mappedBy = "complianceHub",cascade = CascadeType.ALL,orphanRemoval = true)

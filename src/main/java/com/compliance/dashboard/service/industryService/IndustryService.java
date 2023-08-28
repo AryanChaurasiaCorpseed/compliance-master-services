@@ -1,19 +1,22 @@
 package com.compliance.dashboard.service.industryService;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.compliance.dashboard.controller.industryController.IndustryRequest;
+import com.compliance.dashboard.model.industryModel.Industry;
 @Service
 public interface IndustryService {
 
-	ResponseEntity fetchAllIndustries();
+	List<Industry> fetchAllIndustries();
 
-	ResponseEntity deleteIndustryById(Long industryId);
+	Boolean deleteIndustryById(Long industryId);
 
-	ResponseEntity fetchIndustryById(Long industryId);
+	Industry fetchIndustryById(Long industryId);
 
-	ResponseEntity updateIndustry(IndustryRequest industryRequest);
+	Boolean updateIndustry(IndustryRequest industryRequest);
 
 	ResponseEntity saveIndustry(IndustryRequest industryRequest);
 }
