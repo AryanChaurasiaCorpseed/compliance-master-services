@@ -13,6 +13,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -32,25 +35,21 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Column(unique = true)
     private String name;
 
-
     private String shortName;
-//
-//    @Column@Temporal(name = "created_at")
-//    (TemporalType.TIMESTAMP)
+
     private Date createdAt;
 
-//    @Column(name = "updated_at")
-//    @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-//    @Column(length = 1,name="is_enable",columnDefinition = "tinyint(1) default 1")
-//    @Comment(value = "1 : Active, 0 : Inactive")
     private boolean isEnable;
 
-//    @OneToMany(mappedBy = "country",cascade = CascadeType.ALL,orphanRemoval = true)
-//    private Set<State> states=new HashSet<>();
-//
+    
+    @OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="country_state",joinColumns = {@JoinColumn(name="country_state_id",referencedColumnName="id",nullable=true)},
+			inverseJoinColumns = {@JoinColumn(name="country_id"
+					+ "",referencedColumnName = "id",nullable=true,unique=false)})
+    private List<State> states=new ArrayList<>();
+
 }
