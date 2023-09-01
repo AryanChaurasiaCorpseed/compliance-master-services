@@ -1,11 +1,15 @@
 package com.compliance.dashboard.service.stateService;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.compliance.dashboard.model.stateModel.State;
+
 @Service
 public interface StateService {
-    ResponseEntity fetchAllStates(Long countryId);
+    List<State> fetchAllStates(Long countryId);
 
-	ResponseEntity fetchAllStateList();
+	List<State> fetchAllStateList();
 }
