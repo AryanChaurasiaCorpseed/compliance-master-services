@@ -1,30 +1,45 @@
 package com.compliance.dashboard.serviceImpl.subIndustryServiceImpl;
 
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.compliance.dashboard.controller.subIndustryController.SubIndustryRequest;
+import com.compliance.dashboard.model.subIndustryModel.SubIndustry;
 import com.compliance.dashboard.service.subIndustryService.SubIndustryService;
-
+import com.compliance.dashboard.repository.*;
 @Service
 public class SubIndustryServiceImpl implements SubIndustryService {
+	
+	@Autowired
+	SubIndustryRepository subIndustryRepository;
 
 	@Override
 	public ResponseEntity deleteSubIndustryById(Long subIndustryId) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
-	public ResponseEntity fetchSubIndustryById(Long subIndustryId) {
+	public SubIndustry fetchSubIndustryById(Long subIndustryId) {
 		// TODO Auto-generated method stub
-		return null;
+		SubIndustry si =subIndustryRepository.findById(subIndustryId).get();
+		return si;
 	}
 
 	@Override
-	public ResponseEntity updateSubIndustry(SubIndustryRequest subIndustryRequest) {
+	public SubIndustry updateSubIndustry(SubIndustryRequest subIndustryRequest) {
 		// TODO Auto-generated method stub
-		return null;
+		SubIndustry si =subIndustryRepository.findById(subIndustryRequest.getId()).get();
+        si.setTitle(subIndustryRequest.getTitle());
+        si.setUpdatedAt(new Date());
+        si.setEnable(subIndustryRequest.isEnable());
+        subIndustryRepository.save(si);
+		return si;
 	}
 
 	@Override
@@ -36,6 +51,7 @@ public class SubIndustryServiceImpl implements SubIndustryService {
 	@Override
 	public ResponseEntity fetchAllSubIndustry() {
 		// TODO Auto-generated method stub
+		List<SubIndustry> subIndustry = subIndustryRepository.findAll();
 		return null;
 	}
 

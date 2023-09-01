@@ -1,23 +1,46 @@
 package com.compliance.dashboard.serviceImpl.stateServiceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.compliance.dashboard.model.countryModel.Country;
+import com.compliance.dashboard.model.stateModel.State;
+import com.compliance.dashboard.repository.CountryRepository;
+import com.compliance.dashboard.repository.StateRepository;
 import com.compliance.dashboard.service.stateService.StateService;
 
 @Service
 public class StateServiceImpl implements StateService {
 
+	@Autowired
+	CountryRepository countryRepository;
+	
+	@Autowired
+	StateRepository stateRepository;
+	
 	@Override
-	public ResponseEntity fetchAllStates(Long countryId) {
+	public List<State> fetchAllStates(Long countryId) {
 		// TODO Auto-generated method stub
-		return null;
+		List<State>states = new ArrayList<>();
+		Optional<Country> opCountry = countryRepository.findById(countryId);
+		if(opCountry!=null && opCountry.get()!=null) {
+			Country country=opCountry.get();
+			states=country.getStates();
+		}
+		return states;
 	}
 
 	@Override
-	public ResponseEntity fetchAllStateList() {
+	public List<State> fetchAllStateList() {
 		// TODO Auto-generated method stub
-		return null;
+		List<State> states = stateRepository.findAll();
+		return states;
 	}
 
 //    @Autowired

@@ -8,10 +8,15 @@ import com.compliance.dashboard.model.complianceCategoryHub.ComplianceCategoryHu
 import com.compliance.dashboard.model.complianceHubModel.ComplianceHub;
 import com.compliance.dashboard.model.subIndustryModel.SubIndustry;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -88,8 +93,12 @@ public class Industry {
 		this.isEnable = isEnable;
 	}
 
-//	@OneToMany(mappedBy = "industry",cascade = CascadeType.ALL,orphanRemoval = true)
-//	private List<SubIndustry> subIndustries=new ArrayList<>();
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="industry_sub_industry",joinColumns = {@JoinColumn(name="industry_id",referencedColumnName="id",nullable=true)},
+			inverseJoinColumns = {@JoinColumn(name="industry_sub_industry_id"
+					+ "",referencedColumnName = "id",nullable=true,unique=false)})
+	private List<SubIndustry> subIndustries=new ArrayList<>();
 	
 	
 
