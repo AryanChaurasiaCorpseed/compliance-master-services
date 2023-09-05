@@ -18,15 +18,15 @@ public class StateController {
     @Autowired
     private StateService stateService;
 
-    @GetMapping("/{countryId}")
-    public List<State> fetchStateList(@PathVariable("countryId") Long countryId){
+    @GetMapping("/getCountry")
+    public List<State> fetchStateList(@RequestParam Long countryId){
         return this.stateService.fetchAllStates(countryId);
     }
 
 	/* 
 	@Author :- Aryan Chaurasia
 	*/
-    @GetMapping()
+    @GetMapping("getAllState")
     public List<State> fetchAllStateList(){
         return this.stateService.fetchAllStateList();
     }

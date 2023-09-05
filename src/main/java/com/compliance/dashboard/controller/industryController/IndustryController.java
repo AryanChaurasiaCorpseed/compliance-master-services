@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.compliance.dashboard.model.industryModel.Industry;
@@ -25,28 +26,28 @@ public class IndustryController {
 	@Autowired
 	private IndustryService industryService;
 	
-	@GetMapping()
+	@GetMapping("/getAll")
 	public List<Industry> allIndustry(){
 		return this.industryService.fetchAllIndustries();
 	}
 	
-	@PostMapping("/save")
-	public ResponseEntity saveIndustry(@RequestBody IndustryRequest industryRequest){
-		return this.industryService.saveIndustry(industryRequest);
+	@PostMapping("/createIndustry")
+	public Industry saveIndustry(@RequestParam String industryName){
+		return this.industryService.saveIndustry(industryName);
 	}
 	
 	@PutMapping("/update")
-	public Boolean updateIndustry( @RequestBody IndustryRequest industryRequest){
-		return this.industryService.updateIndustry(industryRequest);
+	public Boolean updateIndustry( @RequestParam Long id,@RequestParam String name){
+		return this.industryService.updateIndustry(id,name);
 	}
 	
-	@GetMapping("/{industryId}")
-	public Industry fetchIndustry(@PathVariable("industryId") Long industryId){
+	@GetMapping("/getById")
+	public Industry fetchIndustry(@RequestParam Long industryId){
 		return this.industryService.fetchIndustryById(industryId);
 	}
 
-	@DeleteMapping("/{industryId}")
-	public Boolean deleteIndustry(@PathVariable("industryId") Long industryId){
+	@DeleteMapping("/deleteIndustry")
+	public Boolean deleteIndustry(@RequestParam Long industryId){
 		return this.industryService.deleteIndustryById(industryId);
 	}
 }

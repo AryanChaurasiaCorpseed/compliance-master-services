@@ -10,4 +10,6 @@ import com.compliance.dashboard.model.countryModel.Country;
 @Service
 public interface CountryService {
     List<Country> fetchAllCountry();
+
+	Country createCountry(String name, String shortName);
 }
