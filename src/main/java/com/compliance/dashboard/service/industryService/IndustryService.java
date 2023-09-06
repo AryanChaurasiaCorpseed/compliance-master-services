@@ -16,7 +16,7 @@ public interface IndustryService {
 
 	Industry fetchIndustryById(Long industryId);
 
-	Boolean updateIndustry(IndustryRequest industryRequest);
+	Boolean updateIndustry(Long id,String name);
 
-	ResponseEntity saveIndustry(IndustryRequest industryRequest);
+	Industry saveIndustry(String industryName);
 }

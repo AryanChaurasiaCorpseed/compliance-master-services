@@ -1,22 +1,25 @@
 package com.compliance.dashboard.service.subIndustryService;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.compliance.dashboard.controller.subIndustryController.SubIndustryRequest;
+import com.compliance.dashboard.model.industryModel.Industry;
 import com.compliance.dashboard.model.subIndustryModel.SubIndustry;
 @Service
 public interface SubIndustryService {
 
-    ResponseEntity deleteSubIndustryById(Long subIndustryId);
+    SubIndustry deleteSubIndustryById(Long subIndustryId);
 
     SubIndustry fetchSubIndustryById(Long subIndustryId);
 
-    SubIndustry updateSubIndustry(SubIndustryRequest subIndustryRequest);
+    List<SubIndustry> fetchAllSubIndustry();
 
-    ResponseEntity saveSubIndustry(SubIndustryRequest subIndustryRequest);
+    Industry fetchSubIndustryByIndustry(Long industryId);
 
-    ResponseEntity fetchAllSubIndustry();
+	SubIndustry createSubIndustry(Long industryId, String name) throws Exception;
 
-    ResponseEntity fetchSubIndustryByIndustry(Long industryId);
+	SubIndustry updateSubIndustry(String name, Long id);
 }

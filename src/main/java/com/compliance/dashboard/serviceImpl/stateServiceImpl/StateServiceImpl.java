@@ -1,6 +1,7 @@
 package com.compliance.dashboard.serviceImpl.stateServiceImpl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,7 +27,6 @@ public class StateServiceImpl implements StateService {
 	
 	@Override
 	public List<State> fetchAllStates(Long countryId) {
-		// TODO Auto-generated method stub
 		List<State>states = new ArrayList<>();
 		Optional<Country> opCountry = countryRepository.findById(countryId);
 		if(opCountry!=null && opCountry.get()!=null) {
@@ -38,9 +38,31 @@ public class StateServiceImpl implements StateService {
 
 	@Override
 	public List<State> fetchAllStateList() {
-		// TODO Auto-generated method stub
 		List<State> states = stateRepository.findAll();
 		return states;
+	}
+
+	@Override
+	public State createState(String name,Long countryId) {
+		Optional<Country> opCountry = countryRepository.findById(countryId);
+		State state = new State();
+		state.setName(name);
+		state.setCreatedAt(new Date());
+		state.setEnable(true);
+		state.setUpdatedAt(new Date());
+		stateRepository.save(state);
+		if(opCountry!=null && opCountry.get()!=null) {
+			Country country = opCountry.get();
+			List<State> states = country.getStates();
+			if(states==null) {
+				states=new ArrayList<>();
+				states.add(state);
+			}
+			states.add(state);
+			country.setStates(states);
+			countryRepository.save(country);
+		}
+		return state;
 	}
 
 //    @Autowired
