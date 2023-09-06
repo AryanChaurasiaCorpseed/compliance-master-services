@@ -1,5 +1,6 @@
 package com.compliance.dashboard.serviceImpl.countryServiceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,21 @@ public class CountryServiceImpl implements CountryService {
 	@Override
 	public List<Country> fetchAllCountry() {
 		// TODO Auto-generated method stub
-		List<Country> countries = countryRepository.findAll();
-		
+		List<Country> countries = countryRepository.findAll();		
 		return countries;
+	}
+
+	@Override
+	public Country createCountry(String name, String shortName) {
+		// TODO Auto-generated method stub
+		Country country= new Country();
+		country.setName(name);
+		country.setShortName(shortName);
+		country.setEnable(true);
+		country.setCreatedAt(new Date());
+		country.setUpdatedAt(new Date());
+		countryRepository.save(country);
+		return country;
 	}
 
 //    @Autowired

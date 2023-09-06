@@ -60,7 +60,7 @@ public class SubIndustry {
 
 //	@Column(length = 1,name="is_enable",columnDefinition = "tinyint(1) default 1")
 //	@Comment(value = "1 : Active, 0 : Inactive")
-	private boolean isEnable;
+	private Boolean isEnable;
 	
 //	@OneToMany(mappedBy = "subIndustry",cascade = CascadeType.ALL,orphanRemoval = true)
 //	private List<BusinessActivity> businessActivities=new ArrayList<>();

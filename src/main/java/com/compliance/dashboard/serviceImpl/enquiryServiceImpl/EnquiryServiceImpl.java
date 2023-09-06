@@ -19,10 +19,12 @@ public class EnquiryServiceImpl implements EnquiryService {
 	@Override
 	public ResponseEntity saveComplianceEnquiry(Long complianceId, int status) {
 		// TODO Auto-generated method stub
-		Optional<Enquiry> opEnquiry = enquiryRepository.findById(complianceId);
-		if(opEnquiry!=null) {
-			Enquiry enquiry = opEnquiry.get();
-		}
+//		Optional<Enquiry> opEnquiry = enquiryRepository.findById(complianceId);
+//		if(opEnquiry!=null && opEnquiry.get()!=null) {
+//			Enquiry enquiry = opEnquiry.get();
+//			enquiry.set
+			
+//		}
 		return null;
 		
 	}

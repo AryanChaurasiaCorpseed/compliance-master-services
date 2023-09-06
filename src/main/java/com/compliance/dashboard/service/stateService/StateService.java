@@ -12,4 +12,7 @@ public interface StateService {
     List<State> fetchAllStates(Long countryId);
 
 	List<State> fetchAllStateList();
+
+
+	State createState(String name, Long countryId);
 }
