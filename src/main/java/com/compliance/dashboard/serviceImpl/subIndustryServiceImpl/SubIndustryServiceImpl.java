@@ -1,13 +1,17 @@
 package com.compliance.dashboard.serviceImpl.subIndustryServiceImpl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.compliance.dashboard.controller.subIndustryController.SubIndustryRequest;
+import com.compliance.dashboard.model.industryModel.Industry;
 import com.compliance.dashboard.model.subIndustryModel.SubIndustry;
 import com.compliance.dashboard.service.subIndustryService.SubIndustryService;
 import com.compliance.dashboard.repository.*;
@@ -16,12 +20,48 @@ public class SubIndustryServiceImpl implements SubIndustryService {
 	
 	@Autowired
 	SubIndustryRepository subIndustryRepository;
+	
+	@Autowired
+	IndustryRepository industryRepository;
+
+	
+	@Override
+	public SubIndustry createSubIndustry(Long industryId, String name) throws Exception {
+		
+         SubIndustry subIndustry = new SubIndustry();
+		 Optional<Industry> opIndustry = industryRepository.findById(industryId);
+
+		if(opIndustry!=null && opIndustry.get()!=null) {
+			Industry industry = opIndustry.get();
+			subIndustry.setTitle(name);
+			subIndustry.setIsEnable(true);
+			subIndustry.setUpdatedAt(new Date());
+			subIndustry.setCreatedAt(new Date());
+			subIndustryRepository.save(subIndustry);
+			List<SubIndustry> subIndustryList = industry.getSubIndustries();
+			if(subIndustryList!=null && subIndustryList.size()!=0) {
+				subIndustryList.add(subIndustry);
+			}else {
+				List<SubIndustry>siList = new ArrayList<>();
+				siList.add(subIndustry);
+				subIndustryList=siList;
+			}
+			industry.setSubIndustries(subIndustryList);
+			industryRepository.save(industry);
+		}
+
+		else {
+			throw new Exception("please insert correct industry Id");
+		}
+		return subIndustry;
+	}
 
 	@Override
-	public ResponseEntity deleteSubIndustryById(Long subIndustryId) {
-		// TODO Auto-generated method stub
-		
-		return null;
+	public SubIndustry deleteSubIndustryById(Long subIndustryId) {
+		SubIndustry si =subIndustryRepository.findById(subIndustryId).get();
+		si.setIsEnable(false);
+		subIndustryRepository.save(si);
+		return si;
 	}
 
 	@Override
@@ -32,34 +72,28 @@ public class SubIndustryServiceImpl implements SubIndustryService {
 	}
 
 	@Override
-	public SubIndustry updateSubIndustry(SubIndustryRequest subIndustryRequest) {
-		// TODO Auto-generated method stub
-		SubIndustry si =subIndustryRepository.findById(subIndustryRequest.getId()).get();
-        si.setTitle(subIndustryRequest.getTitle());
+	public SubIndustry updateSubIndustry(String name,Long id) {
+		SubIndustry si =subIndustryRepository.findById(id).get();
+        si.setTitle(name);
         si.setUpdatedAt(new Date());
-        si.setEnable(subIndustryRequest.isEnable());
+        si.setIsEnable(true);
         subIndustryRepository.save(si);
 		return si;
 	}
 
 	@Override
-	public ResponseEntity saveSubIndustry(SubIndustryRequest subIndustryRequest) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<SubIndustry> fetchAllSubIndustry() {
+		List<SubIndustry> subIndustry = subIndustryRepository.findAll().stream().filter(i->i.getIsEnable().equals(true)).collect(Collectors.toList());
+		return subIndustry;
 	}
 
 	@Override
-	public ResponseEntity fetchAllSubIndustry() {
-		// TODO Auto-generated method stub
-		List<SubIndustry> subIndustry = subIndustryRepository.findAll();
-		return null;
+	public Industry fetchSubIndustryByIndustry(Long industryId) {
+		  Industry industry = industryRepository.findById(industryId).get();  
+		return industry;
 	}
 
-	@Override
-	public ResponseEntity fetchSubIndustryByIndustry(Long industryId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 //	@Autowired
 //	private SubIndustryDao subIndustryDao;

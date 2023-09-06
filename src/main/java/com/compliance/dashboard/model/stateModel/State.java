@@ -14,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -55,9 +56,9 @@ public class State {
     
     
 //    @OneToMany(mappedBy = "state",cascade = CascadeType.ALL,orphanRemoval = true)
-    @OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name="state_city",joinColumns = {@JoinColumn(name="state_id",referencedColumnName="id",nullable=true)},
-			inverseJoinColumns = {@JoinColumn(name="state_city_id"
+    @ManyToMany
+	@JoinTable(name="state_city",joinColumns = {@JoinColumn(name="state_city",referencedColumnName="id",nullable=true)},
+			inverseJoinColumns = {@JoinColumn(name="city_id"
 					+ "",referencedColumnName = "id",nullable=true,unique=false)})
     private Set<City> cities=new HashSet<>();
 

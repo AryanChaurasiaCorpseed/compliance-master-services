@@ -32,7 +32,7 @@ import java.util.*;
 public class Country {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
@@ -44,11 +44,10 @@ public class Country {
     private Date updatedAt;
 
     private boolean isEnable;
-
-    
-    @OneToMany(cascade = CascadeType.ALL)
+   
+    @ManyToMany
 	@JoinTable(name="country_state",joinColumns = {@JoinColumn(name="country_state_id",referencedColumnName="id",nullable=true)},
-			inverseJoinColumns = {@JoinColumn(name="country_id"
+			inverseJoinColumns = {@JoinColumn(name="state_id"
 					+ "",referencedColumnName = "id",nullable=true,unique=false)})
     private List<State> states=new ArrayList<>();
 

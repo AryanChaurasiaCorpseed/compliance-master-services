@@ -26,8 +26,13 @@ public class StateController {
 	/* 
 	@Author :- Aryan Chaurasia
 	*/
-    @GetMapping("getAllState")
+    @GetMapping("/getAllState")
     public List<State> fetchAllStateList(){
         return this.stateService.fetchAllStateList();
     }
+    @GetMapping("/createState")
+    public State createState(@RequestParam String name,@RequestParam Long countryId){
+        return this.stateService.createState(name,countryId);
+    }
+    
 }
