@@ -26,18 +26,18 @@ public class SubIndustryController {
 
 	@Autowired
 	private SubIndustryService subIndustryService;
-	
+
 	@GetMapping("/getAllSubIndustry")
 	public List<SubIndustry> fetchAllSubIndustry(){
 		return this.subIndustryService.fetchAllSubIndustry();
 	}
-	
+
 	@PostMapping("/createSubIndustry")
 	public SubIndustry createSubIndustry(@RequestParam
 			Long industryId,@RequestParam String name) throws Exception{
 		return this.subIndustryService.createSubIndustry(industryId,name);
 	}
-	
+
 	@PutMapping("/updateSubIndustry")
 	public SubIndustry updateSubIndustry(@RequestParam String subIndustryName, @RequestParam Long id){
 		return this.subIndustryService.updateSubIndustry(subIndustryName,id);
@@ -47,7 +47,7 @@ public class SubIndustryController {
 	public Industry fetchSubIndustryByIndustry(@RequestParam Long industryId){
 		return this.subIndustryService.fetchSubIndustryByIndustry(industryId);
 	}
-	
+
 	@GetMapping("/editSubIndustry")
 	public SubIndustry fetchSubIndustryById(@RequestParam Long subIndustryId){
 		return this.subIndustryService.fetchSubIndustryById(subIndustryId);

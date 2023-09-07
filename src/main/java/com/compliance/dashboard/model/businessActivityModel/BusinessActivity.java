@@ -29,26 +29,16 @@ public class BusinessActivity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-//
+	
 	@ManyToOne
 	private SubIndustry subIndustry;
-//	
-//	@NotEmpty
-//	@NotNull
-//	@NotBlank
-//	@Column(name = "title")
-	 String title;
 
-//	@Column(name = "created_at")
-//	@Temporal(TemporalType.TIMESTAMP)
+	String title;
+
 	private Date createdAt;
 
-//	@Column(name = "updated_at")
-//	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 
-//	@Column(length = 1,name="is_enable",columnDefinition = "tinyint(1) default 1")
-//	@Comment(value = "1 : Active, 0 : Inactive")
 	private boolean isEnable;
 
 	public Long getId() {
