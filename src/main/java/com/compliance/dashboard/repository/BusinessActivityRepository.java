@@ -20,7 +20,10 @@ public interface BusinessActivityRepository extends JpaRepository<BusinessActivi
 	List<BusinessActivity> findAllByTitle(String title);
 	
 	
-
-//	BusinessActivity findAllBySubIndustrtryIdAndTitle(Long id, String title);
+	@Query(value = "SELECT * FROM business_activity ba WHERE ba.title = :title and  ba.sub_industry_id=:id ", nativeQuery = true)
+	BusinessActivity findAllBySubIndustrtryIdAndTitle(Long id, String title);
+	
+	@Query(value = "SELECT * FROM business_activity ba WHERE ba.sub_industry_id=:id ", nativeQuery = true)
+	List<BusinessActivity> findAllBySubIndustrtryId(Long id);
 
 }

@@ -2,6 +2,7 @@ package com.compliance.dashboard.controller.businessActivityController;
 
 import com.compliance.dashboard.model.subIndustryModel.SubIndustry;
 
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +25,7 @@ public class BusinessActivityRequest {
 
 	private boolean isEnable;
 
+	@ManyToOne
 	private SubIndustry subIndustry;
 	
 	public Long getId() {

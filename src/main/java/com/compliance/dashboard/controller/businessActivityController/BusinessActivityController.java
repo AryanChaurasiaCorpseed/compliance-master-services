@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.compliance.dashboard.model.businessActivityModel.BusinessActivity;
+import com.compliance.dashboard.model.subIndustryModel.SubIndustry;
 import com.compliance.dashboard.response.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,9 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.compliance.dashboard.service.businessActivityService.BusinessActivityService;
+
+import jakarta.persistence.ManyToOne;
 
 @RestController
 @CrossOrigin
@@ -27,38 +31,37 @@ public class BusinessActivityController {
 	private BusinessActivityService businessActivityService;
 
 	@GetMapping("/getAllBusiness")
-	public ResponseEntity fetchAllBusinessActivity(){
+	public List<BusinessActivity> fetchAllBusinessActivity(){
 		return this.businessActivityService.fetchAllBusinessActivity();
 	}
-	
-	@PostMapping("/save")
-	public ResponseEntity saveBusinessActivity( @RequestBody BusinessActivityRequest baRequest){
-		return this.businessActivityService.saveBusinessActivity(baRequest);
+
+	@PostMapping("/createBusinessActivity")
+	public BusinessActivity createBusinessActivity(@RequestParam String title ,@RequestParam Long subIndustryId) throws Exception{
+		return this.businessActivityService.createBusinessActivity(title,subIndustryId);
 	}
 	
-	@PutMapping("/update")
-	public ResponseEntity updateBusinessActivity( @RequestBody BusinessActivityRequest baRequest){
-		return this.businessActivityService.updateBusinessActivity(baRequest);
+	@PutMapping("/updateBusinessActivity")
+	public Boolean updateBusinessActivity(@RequestParam Long baId,@RequestParam String title ,@RequestParam Long subIndustryId){
+		return this.businessActivityService.updateBusinessActivity(baId,title,subIndustryId);
 	}
 	
-	@GetMapping("/{businessActivityId}")
-	public BusinessActivity fetchBusinessActivityById(@PathVariable("businessActivityId") Long businessActivityId){
+	@GetMapping("/getBusinessActivityById")
+	public BusinessActivity getBusinessActivityById(@RequestParam Long businessActivityId){
 		return this.businessActivityService.fetchBusinessActivityById(businessActivityId);
 	}
 
-	@DeleteMapping("/{businessActivityId}")
-	public boolean deleteBusinessActivity(@PathVariable("id") Long businessActivityId){
+	@DeleteMapping("/deleteBusinessActivity")
+	public boolean deleteBusinessActivity(@RequestParam Long businessActivityId){
 		return this.businessActivityService.deleteBusinessActivityById(businessActivityId);
 	}
 	
 	@GetMapping("/search/{searchData}")
 	public List<BusinessActivity> searchBusinessActivity(@PathVariable("searchData") String searchData){
-
 		return this.businessActivityService.searchBusinessActivity(searchData);
 	}
 	
-	@GetMapping("/list/{subIndustryId}")
-	public ResponseEntity searchBusinessActivityBySubIndustry(@PathVariable("subIndustryId") Long subIndustryId){
+	@GetMapping("/searchBusinessActivityBySubIndustry")
+	public List<BusinessActivity> searchBusinessActivityBySubIndustry(@RequestParam Long subIndustryId){
 		return this.businessActivityService.searchBusinessActivityBySubIndustryId(subIndustryId);
 	}
 }

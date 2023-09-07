@@ -11,11 +11,7 @@ import com.compliance.dashboard.model.businessActivityModel.BusinessActivity;
 @Service
 public interface BusinessActivityService {
 
-	ResponseEntity fetchAllBusinessActivity();
-
-	ResponseEntity saveBusinessActivity(BusinessActivityRequest baRequest);
-
-    ResponseEntity updateBusinessActivity(BusinessActivityRequest baRequest);
+	List<BusinessActivity> fetchAllBusinessActivity();
 
     BusinessActivity fetchBusinessActivityById(Long businessActivityId);
 
@@ -23,5 +19,9 @@ public interface BusinessActivityService {
 
     List<BusinessActivity> searchBusinessActivity(String searchData);
 
-    ResponseEntity searchBusinessActivityBySubIndustryId(Long subIndustryId);
+    List<BusinessActivity> searchBusinessActivityBySubIndustryId(Long subIndustryId);
+
+	BusinessActivity createBusinessActivity(String title, Long subIndustryId) throws Exception;
+
+	Boolean updateBusinessActivity(Long baId, String title, Long subIndustryId);
 }

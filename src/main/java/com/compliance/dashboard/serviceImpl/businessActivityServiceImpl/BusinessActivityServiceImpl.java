@@ -8,77 +8,44 @@ import org.springframework.stereotype.Service;
 
 import com.compliance.dashboard.controller.businessActivityController.BusinessActivityRequest;
 import com.compliance.dashboard.repository.BusinessActivityRepository;
+import com.compliance.dashboard.repository.SubIndustryRepository;
 import com.compliance.dashboard.service.businessActivityService.BusinessActivityService;
+
+import java.util.Date;
 import java.util.List;
 import com.compliance.dashboard.model.businessActivityModel.BusinessActivity;
+import com.compliance.dashboard.model.subIndustryModel.SubIndustry;
 
 @Service
 public class BusinessActivityServiceImpl implements BusinessActivityService {
 //
 	@Autowired
-	private BusinessActivityRepository businessActivityRepository;
-//
-//	@Autowired
-//	private SubIndustryDao subIndustryDao;
-//
-//	@Autowired
-//	private ResponseMapper responseMapper;
-	
-//	@Override
-//	public ResponseEntity fetchAllBusinessActivity() {
-//		List<BusinessActivity> businessActivityList=this.businessActivityDao.fetchAllBusinessActivity();
-//		if(businessActivityList.isEmpty())
-//			return new ResponseEntity().noContent();
-//
-//		return new ResponseEntity().ok(businessActivityList.stream().map(this::mapToBusinessActivityResponse));
-//	}
-	
+	private BusinessActivityRepository businessActivityRepository;	
+	@Autowired
+	SubIndustryRepository subIndustryRepository;
 
 	@Override
-	public ResponseEntity fetchAllBusinessActivity() {
-		List<BusinessActivity> res=businessActivityRepository.findAll();	
-		if(res.isEmpty()) {
-		      return new ResponseEntity().noContent();
-		}
-	     return new ResponseEntity().ok(res.stream().map(this::mapToBusinessActivityResponse));
+	public List<BusinessActivity> fetchAllBusinessActivity() {
+		List<BusinessActivity> res=businessActivityRepository.findAll();
+		return res;
       }
 
-//	
-//	public ResponseEntity saveBusinessActivity(BusinessActivityRequest baRequest) {
-//		BusinessActivity findBusinessActivity=this.businessActivityDao.
-//				findBusinessActivityBySubIndustryAndTitle(baRequest.getSubIndustry(),
-//						baRequest.getTitle());
-//
-//		if(findBusinessActivity!=null)
-//			return new ResponseEntity().badRequest("Business Activity already exist !!");
-//
-//		BusinessActivity saveBusinessActivity=this.businessActivityDao.saveBusinessActivity(this.responseMapper.mapToSaveBusinessActivity(baRequest));
-//
-//		if(saveBusinessActivity==null)
-//			return new ResponseEntity().internalServerError();
-//
-//		return new ResponseEntity().ok();
-//	}
 
 	@Override
-	public ResponseEntity saveBusinessActivity(BusinessActivityRequest baRequest) {
-		// TODO Auto-generated method stub
+	public BusinessActivity createBusinessActivity(String title, Long subIndustryId) throws Exception {
 		BusinessActivity findBusinessActivity=null;
-//		BusinessActivity findBusinessActivity=businessActivityRepository.findAllBySubIndustrtryIdAndTitle(baRequest.getSubIndustry().getId(),baRequest.getTitle());
+		findBusinessActivity=businessActivityRepository.findAllBySubIndustrtryIdAndTitle(subIndustryId,title);
 		if(findBusinessActivity!=null){
-			return new ResponseEntity().badRequest("Business Activity already exist !!");
+			throw new Exception("already exist");
 		}
-//		BusinessActivity saveBusinessActivity=this.businessActivityDao.saveBusinessActivity(this.responseMapper.mapToSaveBusinessActivity(baRequest));
-        
+		SubIndustry si =subIndustryRepository.findById(subIndustryId).get();
 		BusinessActivity businessActivity = new BusinessActivity();
-		businessActivity.setTitle(baRequest.getTitle());
-//		businessActivity.setSubIndustry(baRequest.getSubIndustry());
+		businessActivity.setTitle(title);
 		businessActivity.setEnable(true);
+		businessActivity.setUpdatedAt(new Date());
+		businessActivity.setSubIndustry(si);
 		BusinessActivity saveBusinessActivity = businessActivityRepository.save(businessActivity);
-		if(saveBusinessActivity==null) {
-			return new ResponseEntity().internalServerError();
-		}
-		return new ResponseEntity().ok();
+		return saveBusinessActivity;
 	}
 	
 //	@Override
@@ -100,14 +67,13 @@ public class BusinessActivityServiceImpl implements BusinessActivityService {
 //	}
 
 	@Override
-	public ResponseEntity updateBusinessActivity(BusinessActivityRequest baRequest) {
-		// TODO Auto-generated method stub
-        BusinessActivity findBusinessActivity = businessActivityRepository.findById(baRequest.getId()).get();		
-        findBusinessActivity.setTitle(baRequest.getTitle());       
-        findBusinessActivity.setSubIndustry(baRequest.getSubIndustry());
-        findBusinessActivity.setEnable(baRequest.isEnable());
+	public Boolean updateBusinessActivity(Long baId, String title, Long subIndustryId) {
+        BusinessActivity findBusinessActivity = businessActivityRepository.findById(baId).get();		
+        findBusinessActivity.setTitle(title); 
+		SubIndustry si =subIndustryRepository.findById(subIndustryId).get();    
+        findBusinessActivity.setSubIndustry(si);
         businessActivityRepository.save(findBusinessActivity);
-		return new ResponseEntity().ok();
+		return true;
 	}
 
 
@@ -140,7 +106,7 @@ public class BusinessActivityServiceImpl implements BusinessActivityService {
         BusinessActivity findBusinessActivity = businessActivityRepository.findById(businessActivityId).get();		
         findBusinessActivity.setEnable(false);
         businessActivityRepository.save(findBusinessActivity);
-		return findBusinessActivity.isEnable();
+		return true;
 	}
 
 	@Override
@@ -150,14 +116,16 @@ public class BusinessActivityServiceImpl implements BusinessActivityService {
 	}
 
 	@Override
-	public ResponseEntity searchBusinessActivityBySubIndustryId(Long subIndustryId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<BusinessActivity>  searchBusinessActivityBySubIndustryId(Long subIndustryId) {
+        List<BusinessActivity> findBusinessActivity = businessActivityRepository.findAllBySubIndustrtryId(subIndustryId);		
+		return findBusinessActivity;
 	}
 
 	private <R> R mapToBusinessActivityResponse(BusinessActivity businessactivity1) {
 		return null;
 	}
+
+
 
 //	@Override
 //	public ResponseEntity fetchAllBusinessActivity() {
